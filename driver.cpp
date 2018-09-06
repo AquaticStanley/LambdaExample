@@ -2,6 +2,7 @@
 
 // Dependencies
 #include <iostream>
+#include <vector>
 #include "Array.h"
 
 // Convenient outputting
@@ -47,4 +48,28 @@ int main()
 
   cout << "Added 1 to each element:\n";
   cout << array << endl;
+
+  auto zeroOut = [](int& element) { element = 0; };
+  array.applyToArray(zeroOut);
+
+  cout << "Zeroed out array:\n";
+  cout << array << endl;
+
+  cout << "Make lambdas progmatically:\n";
+  std::vector<std::function<void(int&)>> lambdaVect;
+
+  for(int i = 0; i < 5; i++)
+  {
+    auto newLambda = [i](int& element) { element += i; };
+    lambdaVect.push_back(newLambda);
+  }
+
+  for(unsigned int i = 0; i < lambdaVect.size(); i++)
+  {
+    cout << "Add " << i << " to all elements:\n";
+    array.applyToArray(lambdaVect[i]);
+    cout << array;
+    cout << "Zeroing out...\n" << endl;
+    array.applyToArray(zeroOut);
+  }
 }
