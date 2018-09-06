@@ -49,12 +49,14 @@ int main()
   cout << "Added 1 to each element:\n";
   cout << array << endl;
 
+  // Zero out array
   auto zeroOut = [](int& element) { element = 0; };
   array.applyToArray(zeroOut);
 
   cout << "Zeroed out array:\n";
   cout << array << endl;
 
+  // Make lambdas programmatically
   cout << "Make lambdas progmatically:\n";
   std::vector<std::function<void(int&)>> lambdaVect;
 
